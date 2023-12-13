@@ -4,7 +4,7 @@
 
 console.log(3 
     +
-     3)  // code readability should be high write ccode that is understandable.
+     3)  // code readability should be high write code that is understandable.
 
 console.log("Hitesh")
 
