@@ -39,3 +39,4 @@ const myObject = {
 //     console.log(key, ':-', value);
     
 // }// error because object contain key value pair in unordered manner.
+//objects are not iterable.
