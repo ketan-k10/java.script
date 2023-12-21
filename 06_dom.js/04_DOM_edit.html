@@ -1,0 +1,60 @@
+// edit and remove element in javascript.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketan Joshi || DOM </title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <ul class="language">
+        <li>javascript</li>
+    </ul>
+</body>
+
+<script>
+    //basic approach to add element through javascript. (create element  then use innerhtml then append that element )
+    function addlanguage(langname){    
+        const li = document.createElement('li');
+        li.innerHTML = `${langname}`;
+        document.querySelector('.language').appendChild(li);
+    }
+    addlanguage('python');
+    addlanguage('Java');
+
+    // Another approach. better then previous acc to datastructure (create element then in it append the newcreated text in it, now append this eleement).
+    
+    function addlang(langname){
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langname));
+        document.querySelector('.language').appendChild(li);
+    }
+    addlang('CSS');
+    addlang('React');
+
+    //This was about addition now lets see for edit.
+    //EDIT:- 
+
+    // first select that element you want to edit
+    const secondlang = document.querySelector('li: nth-child(2)'); // check the sytax carefully. li ka 2nd child
+    secondlang.innerHTML = 'typescript';
+
+    //another better way. create a new element then replace using .replacewith .
+    const newli = document.createElement('li');
+    newli.textContent = "Typescript";
+    secondlang.replaceWith(newli);
+
+    //edit    another way of editing
+    const firstlang = document.querySelector("li:first-child");  // li ka first child
+    firstlang.outerHTML = '</li>redux</li>'
+    
+
+    // remove  using .remove
+    const lastlang = document.querySelector('li:last-child')
+    lastlang.remove();
+
+
+</script>
+</html>
