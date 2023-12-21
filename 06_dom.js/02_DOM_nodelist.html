@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketan</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <div class="parent"> // iske(div with class parent ) ke childnodes jo h vo console m nodelist m aate h jisme newline,comment ye bhi ek element h.
+        <!-- This is comment which will take 1 node in nodelist  -->
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thrusday</div>
+
+    </div>
+    
+</body>
+<script> // write in js changes will be seen in console.
+    const parent = document.querySelector('.parent')
+    console.log(parent);  //div having class parent.
+    console.log(parent.children); // HTML collection inoutput on console.
+    console.log(parent.children[1].innerHTML);
+
+    for(let i=0; i<parent.children.length;i++){
+    console.log(parent.children[i].innerHTML);
+    }
+    parent.children[1].style.color = "orange";
+    console.log(parent.firstElementChild);
+    console.log(parent.lasttElementChild);
+
+    //we can also access parent element or sibing element like this
+    const dayOne = document.querySelector('.day')
+    console.log(dayOne);
+    console.log(dayOne.parentElement);
+    console.log(dayOne.parentElementSibling);
+    //ese hi dot method ka use karke ham parent child and sibling k bich m traverse karke unko access kar skte h ya value jaan sakte h.
+
+
+    // newline, text har chiz seperate node h example
+    console.log('Nodes:- ', parent.childNodes);   // nodelist output m
+
+
+</script>
+</html>
