@@ -1,11 +1,11 @@
 # projects related to DOM
 
 ## project link
-[click here](https://stackblitz.com/edit/dom-project-chaiaurcode-oqzeka?file=index.html)
+[click here stackblits](https://stackblitz.com/edit/dom-project-chaiaurcode-oqzeka?file=index.html)  
 
 # Solution Code
 
-## Project 1
+## Project 1 (Color Changer) solution 
 
 ```javascript
 
@@ -47,7 +47,54 @@ document.addEventListener('click', function (e) {
   // if (e.target.id === 'yellow') {
   //   document.querySelector('body').style.backgroundColor = e.target.id;
   // }
+  });
+  ```
+   ## project 2 (BMI Generator) solution 
+
+```javascript
+const form = document.querySelector('form');
+//const height = parseInt(document.querySelector('#height').value);
+// This usecase will give you empty result because you are declaring height variable outside form which in default is empty thats why.
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  //jab form submit krte ho to url me ya server k paas jata h to submit se pehle hame calculations krni h to jo bhi default action h form ka use roklo!!
+
+  // to understand this line check the link :- https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+
+  const height = parseInt(document.querySelector('#id-height').innerText);
+  const weight = parseInt(document.querySelector('#id-weight').innerText);
+  const result = document.querySelector('#id-results');
+
+  // ab hamko checks lgane padenge height or weight p varna code phat skta h.
+  if (height === '' || height <= 0 || isNaN(height)) {
+    result.innerHTML = `Please give a valid height. its ${height}`;
+  } else if (weight === '' || weight < 0 || isNaN(weight)) {
+    result.innerHTML = `Please give a valid weight ${weight}`;
+  } else {
+    const bmi = (weight / ((height * height) / 10000)).toFixed(2);
+    //show the result
+    result.innerHTML = `<span>${bmi}</span>`;
+    // innerhtml me span tag bhi use kr sakte h
+     if (bmi < 18.6 || bmi < 0) {
+      result.innerHTML = `${bmi}, which is Under Weight`;
+    } else if (bmi === 18.6 || bmi > 18.6 || bmi < 24.9 || bmi === 24.9) {
+      result.innerHTML = `${bmi}, which is Normal Weight`;
+    }
+    if (bmi > 24.9) {
+      result.innerHTML = `${bmi}, which is Over Weight`;
+    }
+  }
 });
 
+```
+ ## project 3 (Digital Clock) solution 
+
+```javascript
 
 ```
+ ## project 4 (Guess The Number) solution 
+
+```javascript
+
+```
+
