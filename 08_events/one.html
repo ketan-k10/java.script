@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html events  </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <!-- we have to pop alert when the user click on the element. so there are three ways to do it.(third one is best) -->
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+              <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" onclick="(alert('japan'))"></li>
+            <!-- First approach :- onclick property tag me hi use krke usko track kr sakte h. but not feasable. -->
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+
+    // second approach (inside script ) :- getelement by id . onclick = function(alert())
+     
+    document.getElementById('owl').onclick = function(){alert('owl clicked')}
+
+    // Third approach is best and most feasable. in that we get an option of propogation as well (true or false)
+    //using add event listner  syntax is like addEventListener('click',function(){},false) 3 parameters first is type of event, second is function you wanna do when event occur , third is default false
+    document.getElementById('prayer').addEventListener('click',function(e){
+          alert('prayer clicked');
+          console.log(e);  // e is an pointer event  type: object containg different types of event like click.
+    },false)
+
+     // assignment :- see about the following types of event and what they do listed below
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+
+    // false: event bubbling   inner to outer element. (bottom to top)
+    // true: event capturing    top to bottom 
+
+    //if you dont want bubbling or capturing you want to stop propogation there only, then use e.stopPropogation() inside function then it will not go bottom to top or vice versa.
+
+    document.getElementById('images').addEventListener('click', function(e){
+        console.log("clicked inside the ul");
+    }, false)
+
+    document.getElementById('owl').addEventListener('click', function(e){
+        console.log("owl clicked");
+        e.stopPropagation()
+    }, false)
+    
+     //using preventDefault on link.
+
+    document.getElementById('google').addEventListener('click',function(e){
+        e.preventDefault(); //stoped to navigate to link.
+        e.stopPropagation()
+        console.log("google clicked");
+    }, false)
+   
+    
+
+    //  we have to remove image when the user click on the element.
+     
+    // document.querySelector('#images').addEventListener('click',function(e){ //ul with id images.
+    //     console.log(e.target.parentNode); //we will get the li in which the image is stored.
+    //     let removeIt = e.target.parentNode
+    //     removeIt.remove();//remove is new so we can also use  removechild()
+    //     removeIt.parentNode.removeChild(removeIt);
+
+    // },false)
+     
+     // but one problrm in the above event listener that when we click on ul other than images than all the images gets removed so we will apply condition here usikng tagname.
+
+     document.querySelector('#images').addEventListener('click',function(e){
+           
+        if(e.target.tagName === 'IMG'){
+            console.log(e.target.id);
+            e.target.parentNode.remove();
+        }
+
+     },false)
+       //removeIt.parentNode.removeChild(removeIt)
+</script>
+</html>
