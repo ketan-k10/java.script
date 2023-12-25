@@ -1,0 +1,141 @@
+<!-- //    know about xml http request and asynchronous/synchronous programming and js.
+//         Read this documentation to gret an idea:-     https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K10's web</title>
+    <style>
+        div h2 {
+            display: inline;
+            margin-right: 10px; /* Optional: Add some margin between the h2 elements */
+        }
+        
+    </style>
+</head>
+<body style="background-color: #212121; color: #fff;">
+   <pre>
+<h4>   Value	          State	                Description</h4>
+    0	                UNSENT	              Client has been created. open() not called yet.
+    1	                OPENEDm               open() has been called.
+    2	                HEADERS_RECEIVED	  send() has been called, and headers and status are available.
+    3	                LOADING	              Downloading; responseText holds partial data.
+    4	                DONE	              The operation is complete.
+   </pre>
+   <!-- <form action="/submit" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    'required' attribute ensures that the field must be filled before submitting
+
+    <input type="submit" value="Submit"> -->
+
+    <form class="form">
+        <label2 for="username" id="guess">Enter github username:- </label>
+        <input type="text" id="username" class="github" required>
+        <input type="submit" id="subt" value="Give info" class="idSubmit">
+    </form>
+
+    <div id="showdata">
+        <div><br><h2>Username :-   </h2>
+        <h2 id="usernam"></h2></div>
+        <div><h2>Name :-   </h2><h2 id="name"></h2></div><br><h2> Profile :- </h2></div>
+        <div><img style="width: 200px;"  id="image" src="" alt=""></div>
+        <div><h2>Repositories :- </h2> <h2 id="Repos"></h2></div>
+        <div ><h2>Followers   :- </h2> <h2 id="followers"></h2> </div>
+        <div><h2> Github Link :- </h2><a id="link" href="">github profile</a></div>
+        <div><h2>last Updated at :-  </h2> <h2 id="register"></h2></div>
+    </div>
+
+</body>
+<script>
+    // // make object using xmlhttp request.
+    // // XMLHttpRequest()  // ye ek class h ese call nhi kr sakte(error) iska object bnana padega.
+    // const obj = new XMLHttpRequest();
+    // console.log(obj)
+    
+    // requestUrl = 'https://api.github.com/users/ketan-k10'
+
+    // console.log(obj.readyState) //readystate is  0 here
+
+    // obj.open('GET',requestUrl) // open will not get called by itself, when you write object.send() then its actually gets called.
+   
+    // console.log(obj.readyState); // readystate is 1 here as you called open()
+    
+    // //we can track readystate as it changes.
+
+    // obj.onreadystatechange = function(){ // onreadystatechange  requires function to call which will be called when readystate changes.
+    //     console.log(obj.readyState) // you can see in console
+    // }   
+    // obj.send()
+    // console.log(obj.readyState) //here also readystate is 1 it is because send() operation is running it will take time
+    // // when you perform send()
+    // //then readystate change from 1 to 2 then 3 then 4.
+
+
+    // //-------------------ok so now you have understood the concept  lets see about response text--------------//
+    // obj.onreadystatechange =function(){
+    //     if(obj.readyState === 4){
+    //         let data =JSON.parse(this.responseText)
+    //         console.log(this.responseText) // when the ready state become 3 or 4 (take 4 process will be done) we can access json api in form of string using this.responseText.
+    //         //we got the data(this.responseText) in string format so we have to get it in object(JSON) format. so we will use JSON.parse{}
+            
+    //         //now we got the data of user in form of object so now we can get any info which we want. 
+    //         console.log(data.login)
+    //         console.log(data.public_repos)
+    //     }
+
+    // }
+
+//***********************************************************The project starts here  ***********************************************************/
+         
+         document.querySelector('#subt').addEventListener('click',xyz)
+
+         function xyz(e){
+            e.preventDefault();
+            let username_p = document.querySelector('#username').value
+            console.log(username_p)
+            document.querySelector('#username').value = null
+            console.log(username_p)
+            // console.log(username_p)
+            let url =`https://api.github.com/users/${username_p}`
+            // console.log(url)
+
+            let object =  new XMLHttpRequest();
+           //    console.log(object.readyState)  // it will be 0
+            object.open('GET',url);
+           // console.log(object.readyState)    // it will be 1 
+           object.onreadystatechange = function(){
+            // console.log(object.readyState)   // 2 then 3 then 4.
+             if(object.readyState === 4){
+                 let data = JSON.parse(object.responseText);
+                console.log(data)
+                let avatar_url = data.avatar_url;//link to image
+                let name = data.name; //name
+                let repos = data.public_repos;// no. of public repositories.
+                let link = data.html_url;
+                let followers = data.followers;
+                let created = data.updated_at;
+                 
+                // console.log(document.querySelector('#usernam').innerHTML)
+                document.querySelector('#usernam').innerHTML = `${username_p}`;
+                document.querySelector('#image').src =`${avatar_url}`;
+                document.querySelector('#name').innerHTML = `${name}`;
+                document.querySelector('#Repos').innerHTML = `${repos}`;
+                document.querySelector('#followers').innerHTML = `${followers}`;
+                document.querySelector('#link').href = `${link}`;
+                document.querySelector('#register').innerHTML = `${created}`;
+            }
+           }
+           object.send();
+
+            url =null;
+            //username_p = null;
+            //object = null;   find reason why it cant be null.
+         }
+</script>
+
+</html>
