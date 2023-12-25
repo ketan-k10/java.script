@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h1> Ketan Joshi </h1>
+    <button id="stop">clear timeout</button>
+    <button id="stop2">clear interval</button>
+
+    
+</body>
+<script>
+    // syntax of settimeout.
+    // setTimeout(() => {}, timeout);
+    setTimeout(() => {
+        console.log("ketan");
+    }, 4000); // just to understand, after 4 sec it will print ketan on console.
+    
+    
+    // one good practice is always store the settimeout set intervel type of function in a variable. what you want to do in a seperate function then call the function inside this intervels using referance.
+
+     // now we have understood so our task is to change h1 and edit it(after 4 sec) so heres how to do it.
+     
+    //  setTimeout(() => {
+    //     document.querySelector('h1').innerHTML= "Hii Welcome to K10 web"
+    //  }, 4000);
+     
+     // now we want that when user click on stop  cleartimeout gets executed. we have pass settimeout referance in cleartimeout. 
+    
+    
+     const changeText = function () {
+        
+        document.querySelector('h1').innerHTML= "Hii Welcome to K10 web"
+     }
+
+     const changeMe = setTimeout(changeText, 4000);// used reference of a function to perform it.
+
+    // cleartimeout needs reference of that settimeout that you want to clear
+    // the cleartimeout is generally used with event listener.
+    
+    document.querySelector('#stop').addEventListener('click',function(e){
+        clearTimeout(changeMe)
+        console.log("Stopped")
+    }) // if you do this this event before the settimout start you will stop the settimeout to occur.
+     
+      
+    
+    // syntax of setInterval. 
+    // setInterval(() => {}, interval);
+    
+    const intervalId = setInterval(() => {
+         console.log("ketan");
+    }, 2000);
+
+   // clearInterval(intervalId); // using clearinterval directly will stop setonterval to occur. so again we have to execute it on some event.
+    document.querySelector('#stop2').addEventListener('click',(e)=>{clearInterval(intervalId)})
+</script>
+</html>
+
